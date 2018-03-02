@@ -84,6 +84,9 @@
 |top|上へxブロック移動|
 |bottom|下へxブロック移動|
 
+### mal.setParam(param名,　値)
+map,layer以外の指定したParamデータを書き換えます。
+
 ---
 
 ## ライセンス
