@@ -74,15 +74,15 @@
 ### mal.getParamsData()
 現在編集中のParamデータ一式を取得します。
 
-## mal.scrollEditor(方向, ブロック数)
+### mal.scrollEditor(方向, ブロック数)
 エディタ画面をスクロールさせます。
 
 |方向|結果|
 |---|---|
-|left|左へxブロック数移動|
-|right|右へxブロック数移動|
-|top|上へxブロック数移動|
-|bottom|下へxブロック数移動|
+|left|左へxブロック移動|
+|right|右へxブロック移動|
+|top|上へxブロック移動|
+|bottom|下へxブロック移動|
 
 ---
 
