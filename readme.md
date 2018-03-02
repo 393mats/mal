@@ -1,24 +1,24 @@
 # MAL (MasaoApp Library)
-「スーパー正男」の制作用エディターをHTMLページ上に簡単に設置できるライブラリです。
-CSS、Javascriptを用いて好みにカスタマイズすることができます。
+「スーパー正男」の制作用エディターをHTMLページ上に簡単に設置できるライブラリです。  CSS、Javascriptを用いて好みにカスタマイズすることができます。
 
-#設置方法
+## 設置方法
+
 <head>間にCSSファイルを読み込みます。中身はページやUIに合わせてお好みに編集してください。
 
-```
+``` 
 <link rel="stylesheet" href="mal.css">
-```
+``` 
 
 次に<body>間にjsライブラリを読み込みんでください
 
-```
+``` 
 <script type="text/javascript" src="./js/mal.js"></script>
-```
+``` 
 そして設置したい場所にエディタとパレットのスクリプトを貼ります。
 
 エディタ
 
-```
+``` 
 <!-- MAL Editor -->
     <script type="text/javascript">
       new mal.Editor({
@@ -27,11 +27,11 @@ CSS、Javascriptを用いて好みにカスタマイズすることができま�
         "mapmode": "0"   //マップモード、１で第３版マップデータを使用
       });
     </script>
-```
+``` 
 
 パレット（標準レイヤー）
 
-```
+``` 
 <!-- MAL Palette -->
     <script type="text/javascript">
       new mal.Palette({
@@ -47,13 +47,13 @@ CSS、Javascriptを用いて好みにカスタマイズすることができま�
         }
       });
     </script>
-```
-#拡張メソッド
+``` 
+## 拡張メソッド
 エディタのカスタマイズ用に各メソッドを用意しています。
 
-##mal.add(登録先, 関数名)
+### mal.add(登録先, 関数名)
 
-イベントへ関数を追加します。登録先の一覧はこちらです。
+イベントへ関数を追加します。登録先の一覧は下記。
 
 |登録先|引数|イベント|
 |---|---|---|
@@ -62,7 +62,7 @@ CSS、Javascriptを用いて好みにカスタマイズすることができま�
 |palette_clicked|x, y, chip|パレットをクリックした時|
 |palette_moved|x, y, chip|マウスがパレット上を動いた時|
 
-##mal.showGrid(モード)
+### mal.showGrid(モード)
 エディタ上にグリッドを表示・非表示します。
 
 |モード|結果|
@@ -70,13 +70,10 @@ CSS、Javascriptを用いて好みにカスタマイズすることができま�
 |0|非表示|
 |1|表示|
 
-##mal.getParamsData()
+### mal.getParamsData()
 現在編集中のParamデータ一式を取得します。
-  
-  
 
---
+---
 
-
-#ライセンス
+## ライセンス
 CC BY 4.0 / 2018 Tex (Tetsuya)
