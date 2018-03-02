@@ -3,13 +3,13 @@
 
 ## 設置方法
 
-<head>間にCSSファイルを読み込みます。中身はページやUIに合わせてお好みに編集してください。
+`<head>`間にCSSファイルを読み込みます。中身はページやUIに合わせてお好みに編集してください。
 
 ``` 
 <link rel="stylesheet" href="mal.css">
 ``` 
 
-次に<body>間にjsライブラリを読み込みんでください
+次に`<body>`間にjsライブラリを読み込みんでください
 
 ``` 
 <script type="text/javascript" src="./js/mal.js"></script>
