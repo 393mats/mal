@@ -50,6 +50,20 @@
       });
     </script>
 ``` 
+
+パレット（背景レイヤー）
+
+``` 
+<!-- MAL SecondPalette -->
+    <script type="text/javascript">
+      new mal.SecPalette({
+        "width": "16",             //パレットの幅　（ブロック単位）
+        "height": "16",             //パレットの高さ（ブロック単位）
+        "pattern": "./mapchip.gif",//パーツの画像ファイル
+      });
+    </script>
+``` 
+
 ## 拡張メソッド
 エディタのカスタマイズ用に各メソッドを用意しています。
 
