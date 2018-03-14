@@ -88,6 +88,12 @@
 ### mal.setParam(param名,　値)
 map,layer以外の指定したParamデータを書き換えます。
 
+### mal.getDefaultParams()
+デフォルトのParam値を取得します。
+
+### setEditorConfig(設定名, 値)
+エディターの設定値を動的に変更します。
+
 ---
 
 ## ライセンス
