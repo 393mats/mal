@@ -105,7 +105,7 @@ map,layer以外の指定したParamデータを書き換えます。
 ### mal.getDefaultParams()
 デフォルトのParam値を取得します。
 
-### setEditorConfig(設定名, 値)
+### mal.setEditorConfig(設定名, 値)
 エディターの設定値を動的に変更します。
 
 ### mal.clearEditor(X座標, Y座標, 幅, 高さ, レイヤーモード)
@@ -116,6 +116,12 @@ map,layer以外の指定したParamデータを書き換えます。
 |---|---|
 |1|標準レイヤー|
 |2|背景レイヤー|
+
+### mal.drawEditor(X座標, Y座標, 幅, 高さ, レイヤーモード, チップ)
+ブロック単位で指定した座標を指定チップで塗りつぶします。Paramデータへも反映されます。
+幅は指定座標から右、高さは下です。
+
+レイヤーモードはclearEditorと同じです。
 
 ---
 
