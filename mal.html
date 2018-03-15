@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MAL Smaple Editor</title>
+  <link rel="stylesheet" href="./css/mal.css">
+</head>
+
+<body>
+  <center>
+    <h2>MAL Smaple Editor</h2>
+    <script type="text/javascript" src="./js/mal.js"></script>
+
+    Chip : <span id="now_chip">.</span> | X : <span id="now_x">0</span> | Y : <span id="now_y">0</span> |
+    <input type="button" onclick="switchGrid()" value="グリッド">
+    <input type="button" onclick="showData()" value="データ">
+    <input type="button" onclick="TEST()" value="Param変更">
+    <input type="button" onclick="prm_con_switch()" value="Paramモード切替">
+    <br>
+    <input type="button" onclick="mal.clearEditor(0,27,3,3,1)" value="左下９マスの標準レイヤーをクリア">
+    <input type="button" onclick="mal.drawEditor(0,27,3,3,1,'a')" value="左下９マスの標準レイヤーにブロック">
+    <br>
+    <input type="button" onclick="mal.scrollEditor('left', 1)" value="←">
+    <input type="button" onclick="mal.scrollEditor('top', 1)" value="↑">
+    <input type="button" onclick="mal.scrollEditor('bottom', 1)" value="↓">
+    <input type="button" onclick="mal.scrollEditor('right', 1)" value="→">
+
+    <!-- MAL Editor -->
+    <script type="text/javascript">
+      new mal.Editor({
+        "width": "180",
+        "height": "30",
+        "mapmode": "0",
+        "scroll" : "1",
+        "prm-con": "0"
+      });
+    </script>
+
+    <!-- MAL Palette -->
+    <script type="text/javascript">
+      new mal.Palette({
+        "width": "16",
+        "height": "6",
+        "pattern": "./parts.png",
+        "parts": {
+          "0": ".A98BCDHIJEFOGPQ",
+          "1": "WXR{}abcdefghijz",
+          "2": "[]<>5647Y+-*/KLM",
+          "3": "NuvwxUV12nmopqrs",
+          "4": "tklySTZ3"
+        }
+      });
+    </script>
+    <!-- MAL Second Palette -->
+    <script type="text/javascript">
+      new mal.SecPalette({
+        "width": "16",
+        "height": "16",
+        "pattern": "./mapchip.gif",
+        "parts": {
+          "0": ".A98BCDHIJEFOGPQ",
+          "1": "WXR{}abcdefghijz",
+          "2": "[]<>5647Y+-*/KLM",
+          "3": "NuvwxUV12nmopqrs",
+          "4": "tklySTZ3"
+        }
+      });
+    </script>
+    </center>
+    <hr>
+    <span id="export">データ</span>
+
+    <!-- 拡張 -->
+    <script type="text/javascript">
+      var grid = 0; //グリッドのカウンタ
+
+      function TEST(){
+
+        mal.setParam("j_tokugi", "2");
+        mal.setParam("shop_name", "たかしくん");
+      }
+
+      function prm_con_switch(){
+        mal.setEditorConfig("prm-con", 1);
+      }
+
+      //  Paramデータ取得
+      function showData(){
+        var prm_data = mal.getParamsData(); //Param取得メソッド
+        document.getElementById("export").innerText = prm_data;
+
+      }
+
+      //  グリッドの表示・非表示切り替え
+      function switchGrid() {
+        if (grid == 1) {
+          mal.showGrid(0);
+          grid = 0;
+        } else {
+          mal.showGrid(1);
+          grid = 1;
+        }
+      }
+
+      function clearTest(){
+
+      }
+
+      //  選んだチップを表示する
+      function nowchip(x, y, chip) {
+        document.getElementById("now_chip").innerText = chip;
+      }
+
+      //  現在の位置を表示する
+      function nowmap(x, y, chip) {
+        document.getElementById("now_x").innerText = x;
+        document.getElementById("now_y").innerText = y;
+      }
+
+      //  イベントへ登録
+      mal.add("palette_clicked", nowchip);
+      mal.add("editor_moved", nowmap);
+    </script>
+
+</body>
+
+</html>

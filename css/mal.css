@@ -1,0 +1,16 @@
+/*
+  MAL CSS
+*/
+#mal_editor{
+  width:512px;
+  height:320px;
+  background:cyan;
+}
+#mal_palette{
+  width:512px;
+  height:192px;
+}
+#mal_palette_2{
+  width:512px;
+  height:512px;
+}
