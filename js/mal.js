@@ -1,4 +1,4 @@
-//MasaoApp Library (MAL) β0.5
+//MasaoApp Library (MAL) β0.52
 //Developed by Tex
 var mal = (function() {
   "use strict";
@@ -19,6 +19,8 @@ var mal = (function() {
   var plt2_width = 16; //デフォルト値
   var plt2_height = 6; //デフォルト値
   var map_format = 0; //0でノーマル、1で第３版
+
+  var pen = 1;
 
   var map0 = [];
   var map1 = [];
@@ -389,7 +391,7 @@ var mal = (function() {
     document.write("<div id=\"mal_editor\"></div>");
     var editor_elm = document.getElementById("mal_editor");
     editor_elm.style.overflow = ovf;
-    editor_elm.style.border = "solid 1px gray";
+    editor_elm.style.border = "hidden";
     editor_elm.style.zIndex = 2;
     editor_elm.style.position = "relative";
 
@@ -453,7 +455,6 @@ var mal = (function() {
     document.write("<div id=\"mal_palette\"></div>");
     var palette_elm = document.getElementById("mal_palette");
     palette_elm.style.overflow = "scroll";
-    palette_elm.style.border = "solid 1px gray";
     palette_elm.style.zIndex = 2;
     palette_elm.style.position = "relative";
     //palette_elm.style.background = "cyan";
@@ -672,6 +673,11 @@ var mal = (function() {
     };
 
     cvs_p1.addEventListener('mousedown', mouseDown, false);
+
+  };
+
+  var resetEditor = function(){
+    alert("aaa");
 
   };
 
@@ -924,10 +930,10 @@ var mal = (function() {
         case "right":
           edt.scrollBy(block, 0);
           break;
-        case "top":
+        case "up":
           edt.scrollBy(0, block * -1);
           break;
-        case "bottom":
+        case "down":
           edt.scrollBy(0, block);
           break;
       }
@@ -1027,6 +1033,36 @@ var mal = (function() {
       }
 
       return;
+    },
+    //  Paramを書き換える
+    newProject: function(version) {
+      var cvs_c1 = document.getElementById("c1");
+      var ctx_c1 = cvs_c1.getContext("2d");
+      var cvs_p1 = document.getElementById("plt1");
+      var ctx_p1 = cvs_p1.getContext("2d");
+      createMapdata(game_width, game_height, mapmode);
+      con_params = createParams();
+      con_params2 = createParams();
+      ctx_c1.clearRect(0, 0, game_width*32, game_height*32);
+      ctx_p1.clearRect(0, 0, plt_width*32, plt_height*32);
+      ctx_p1.drawImage(img_plt1, 0, 0);
+      ctx_p1.fillStyle = "rgba(" + [255, 0, 0, 0.5] + ")";
+      ctx_p1.fillRect(0, 0, 32, 32);
+      chip1 = parts_obj[0].charAt(0);
+      chip1_x = 0;
+      chip1_y = 0;
+      var edt = document.getElementById("mal_editor");
+      edt.scrollTo(0,edt.scrollHeight);
+      return;
+    },
+    setEditMode: function(mode){
+
+    },
+    getNowChip: function(){
+      return chip1;
+    },
+    getNowChip2: function(){
+      return chip2;
     }
 
   };
