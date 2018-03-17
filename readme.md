@@ -100,8 +100,8 @@ CSS、Javascriptを用いて好みにエディタを作ることができます�
 |---|---|
 |left|左へxブロック移動|
 |right|右へxブロック移動|
-|top|上へxブロック移動|
-|bottom|下へxブロック移動|
+|up|上へxブロック移動|
+|down|下へxブロック移動|
 
 ### mal.setParam(param名,　値)
 map,layer以外の指定したParamデータを書き換えます。
@@ -126,6 +126,9 @@ map,layer以外の指定したParamデータを書き換えます。
 幅は指定座標から右、高さは下です。
 
 レイヤーモードはclearEditorと同じです。
+
+### mal.newProject()
+Param、エディタをリセットします。
 
 ---
 
