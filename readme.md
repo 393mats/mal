@@ -3,7 +3,7 @@ MasaoAppを元に制作した「スーパー正男」の制作用エディタを
 
 CSS、Javascriptを用いて好みにエディタを作ることができます。
 
-現在の最新バージョン：0.5 β
+現在の最新バージョン：0.52 β
 
 ## 設置方法
 
@@ -138,12 +138,18 @@ Param、エディタをリセットします。
 |1|ペン|
 |2|消しゴム|
 
+### mal.getNowChip()
+選択中の標準パーツを取得します。
+
+### mal.getNowChip2()
+選択中の背景パーツを取得します。
+
 ---
 
 ## ライセンス
 MIT License
 
-Copyright (c) 2018 Tex (Tetsuya Matsuda) http://tex1.symphonic-net.com/
+Copyright (c) 2018 Tex (Tetsuya Matsuda) https://mmy.fe8works.com/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
