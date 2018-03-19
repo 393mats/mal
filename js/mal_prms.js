@@ -1434,7 +1434,10 @@ var option_prm = {
 };
 
 return {
-  getParamOption: function(key){
+  getParamsOptionAll: function(){
+    return option_prm;
+  },
+  getParamsOption: function(key){
     return option_prm[key];
   }
 };
