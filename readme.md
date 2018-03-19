@@ -148,10 +148,10 @@ Param、エディタをリセットします。
 ## オプションのメソッド
 オプションのjsを使用した時に使えるメソッドです。
 
-### mal_prms.getParamOption(キー)
-mal_prms.jsが必要。 Paramのジャンル、説明、入力形式を取得します。返り値はオブジェクトです。
+### mal_prms.getParamsOption(キー)
+mal_prms.jsが必要。 指定したParamキーのジャンル、説明、入力形式を取得します。返り値はオブジェクトです。
 
-|返り値|結果|
+|返り値のキー|結果|
 |---|---|
 |genr|ジャンル|
 |description|説明(HTML)|
@@ -174,6 +174,9 @@ mal_prms.jsが必要。 Paramのジャンル、説明、入力形式を取得し
 |---|---|
 |string|文字列|
 |integer|整数|
+
+### mal_prms.getParamsOptionAll()
+mal_prms.jsが必要。 全てのParamキーのジャンル、説明、入力形式を取得します。返り値はオブジェクトです。
 
 ---
 
