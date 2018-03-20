@@ -1,9 +1,9 @@
 //InitialValue.jsを元に制作したParamデータの説明
-//2018/3/19 1.0
+//2018/3/20 1.01
 
-var mal_prms = (function() {
+const mal_prms = (function() {
 
-var option_prm = {
+const option_prm = {
   "stage_max": {
     "genr": 0,
     "description": "ステージ数",
@@ -63,6 +63,7 @@ var option_prm = {
     "description": "ゲームの進行スピード<br>  １フレームにおける待ち時間を、設定します。<br>  数字が大きいほど遅くなり、<br>  デフォルトは、 70 です。",
     "type": "integer"
   },
+  /*
   "variable_sleep_time": {
     "genr": 0,
     "description": "",
@@ -73,6 +74,7 @@ var option_prm = {
     "description": "",
     "type": "integer"
   },
+  */
   "pause_switch": {
     "genr": 0,
     "description": "ポーズ機能<br>1  使わない<br>2  使う",

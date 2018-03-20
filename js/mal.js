@@ -1,12 +1,15 @@
-//MasaoApp Library (MAL) β0.52
+//MasaoApp Library (MAL) β0.6
 //Developed by Tex
 var mal = (function() {
   "use strict";
+
+  var msapp_v = "0.6";
 
   var img_plt1 = new Image();
   var img_plt2 = new Image();
   var parts_obj = {};
   var chip1 = ".";
+  var ers1 = ".";
   var chip1_x = 0;
   var chip1_y = 0;
   var chip2 = "..";
@@ -19,6 +22,8 @@ var mal = (function() {
   var plt2_width = 16; //デフォルト値
   var plt2_height = 6; //デフォルト値
   var map_format = 0; //0でノーマル、1で第３版
+
+  var ms_version = "fx16";
 
   var pen = 1;
 
@@ -49,15 +54,6 @@ var mal = (function() {
   var cb_editorMoved = [];
 
   var def_params = {
-    "chizu-0": "...............",
-    "chizu-1": ".b33E33333c..C.",
-    "chizu-2": "....2.....2..2.",
-    "chizu-3": "....2.....2..2.",
-    "chizu-4": "....A33a331331.",
-    "chizu-5": ".i.....2.......",
-    "chizu-6": ".2.....2.......",
-    "chizu-7": ".B33D3313f3d...",
-    "chizu-8": "...............",
     "mes1_name": "ダケシ",
     "serifu1-1": "人の命は、お金では買えないと言われています。",
     "serifu1-2": "しかし、お店へ行けば、ＳＣＯＲＥで買えます。",
@@ -550,6 +546,7 @@ var mal = (function() {
     //  クリックした時
     var mouseDown = function(e) {
       var rect = e.target.getBoundingClientRect();
+      var chip = ers1;
       var x = e.clientX - rect.left;
       var y = e.clientY - rect.top;
       x = Math.floor(x / 32);
@@ -558,23 +555,27 @@ var mal = (function() {
       var cy = y * 32;
       ctx_c1.clearRect(cx, cy, 32, 32);
       //ctx_c1.fillRect(cx, cy, 32, 32);
-      ctx_c1.drawImage(img_plt1, chip1_x * 32, chip1_y * 32, 32, 32, cx, cy, 32, 32);
+      if(pen == 1){
+        ctx_c1.drawImage(img_plt1, chip1_x * 32, chip1_y * 32, 32, 32, cx, cy, 32, 32);
+        chip = chip1;
+      }
 
       if (x < 60) {
-        map0[y][x] = chip1;
+        map0[y][x] = chip;
       } else if (x > 59 && x < 120) {
-        map1[y][x - 60] = chip1;
+        map1[y][x - 60] = chip;
       } else if (x > 119 && x < 180) {
-        map2[y][x - 120] = chip1;
+        map2[y][x - 120] = chip;
       }
 
       mouse_c = 1;
-      callBack_edtClicked(x, y, chip1);
+      callBack_edtClicked(x, y, chip);
     };
 
     //  動かした時
     var mouseMove = function(e) {
       var rect = e.target.getBoundingClientRect();
+      var chip = ers1;
       var x = e.clientX - rect.left;
       var y = e.clientY - rect.top;
       x = Math.floor(x / 32);
@@ -586,29 +587,63 @@ var mal = (function() {
 
         ctx_c1.clearRect(cx, cy, 32, 32);
         //ctx_c1.fillRect(cx, cy, 32, 32);
-        ctx_c1.drawImage(img_plt1, chip1_x * 32, chip1_y * 32, 32, 32, cx, cy, 32, 32);
+        if(pen == 1){
+          ctx_c1.drawImage(img_plt1, chip1_x * 32, chip1_y * 32, 32, 32, cx, cy, 32, 32);
+          chip = chip1;
+        }
 
         if (x < 60) {
-          map0[y][x] = chip1;
+          map0[y][x] = chip;
         } else if (x > 59 && x < 120) {
-          map1[y][x - 60] = chip1;
+          map1[y][x - 60] = chip;
         } else if (x > 119 && x < 180) {
-          map2[y][x - 120] = chip1;
+          map2[y][x - 120] = chip;
         }
 
       }
 
-      callBack_edtMoved(x, y, chip1); //  コールバック
+      callBack_edtMoved(x, y, chip); //  コールバック
     };
 
     var mouseUp = function(e) {
       mouse_c = 0;
     };
 
+    var touchMove = function(e) {
+      var rect = e.target.getBoundingClientRect();
+      var chip = ers1;
+      var x = e.changedTouches[0].clientX - rect.left;
+      var y = e.changedTouches[0].clientY - rect.top;
+      x = Math.floor(x / 32);
+      y = Math.floor(y / 32);
+      var cx = x * 32;
+      var cy = y * 32;
+
+        ctx_c1.clearRect(cx, cy, 32, 32);
+        //ctx_c1.fillRect(cx, cy, 32, 32);
+        if(pen == 1){
+          ctx_c1.drawImage(img_plt1, chip1_x * 32, chip1_y * 32, 32, 32, cx, cy, 32, 32);
+          chip = chip1;
+        }
+
+        if (x < 60) {
+          map0[y][x] = chip;
+        } else if (x > 59 && x < 120) {
+          map1[y][x - 60] = chip;
+        } else if (x > 119 && x < 180) {
+          map2[y][x - 120] = chip;
+        }
+
+      callBack_edtMoved(x, y, chip); //  コールバック
+    };
+
 
     cvs_c0.addEventListener('mousedown', mouseDown, false);
     cvs_c0.addEventListener('mousemove', mouseMove, false);
+    cvs_c0.addEventListener('touchmove', touchMove, false);
     document.addEventListener('mouseup', mouseUp, false);
+    //document.addEventListener('touchend', touchUp, false);
+    //document.addEventListener('touchcancel', mouseUp, false);
     cvs_c0.oncontextmenu = function(){return false;};
 
   };
@@ -676,15 +711,19 @@ var mal = (function() {
 
   };
 
-  var resetEditor = function(){
-    alert("aaa");
-
-  };
-
+  //  Paramsを取得
   var getParams = function() {
-    var params = "";
+    var _params = "";
     var prmData = getConfig(prm_con);
 
+    var paramdata1 = {};
+    var paramdata2 = {};
+
+    var map_ret = "";
+
+    var lay_ret = "";
+
+    var lay2_last = "";
     switch (map_format) {
       case 0:
         var map0_ = [];
@@ -694,42 +733,53 @@ var mal = (function() {
         var lay1_ = [];
         var lay2_ = [];
         for (var i = 0; i <= 29; i++) {
+          paramdata1["map0_" + i] = map0[i].join('');
           map0_[i] = "\"map0-" + i + "\" : \"" + map0[i].join('') + "\",\n";
           //map0_2[i] = map0[i].join('');
         }
         for (var i = 0; i <= 29; i++) {
+          paramdata1["map1_" + i] = map1[i].join('');
           map1_[i] = "\"map1-" + i + "\" : \"" + map1[i].join('') + "\",\n";
           //map1_2[i] = map1[i].join('');
         }
         for (var i = 0; i <= 29; i++) {
+          paramdata1["map2_" + i] = map2[i].join('');
           map2_[i] = "\"map2-" + i + "\" : \"" + map2[i].join('') + "\",\n";
           //map1_2[i] = map1[i].join('');
         }
 
-
         for (var i = 0; i <= 29; i++) {
+          paramdata2["layer0_" + i] = lay0[i].join('');
           lay0_[i] = "\"layer0-" + i + "\" : \"" + lay0[i].join('') + "\",\n";
         }
         for (var i = 0; i <= 29; i++) {
+          paramdata2["layer1_" + i] = lay1[i].join('');
           lay1_[i] = "\"layer1-" + i + "\" : \"" + lay1[i].join('') + "\",\n";
         }
         for (var i = 0; i <= 29; i++) {
+          paramdata2["layer2_" + i] = lay2[i].join('');
           lay2_[i] = "\"layer2-" + i + "\" : \"" + lay2[i].join('') + "\",\n";
         }
 
-        var lay2_last = lay2_.join('');
+        lay2_last = lay2_.join('');
         if (prmData == "") {
 
           lay2_last = lay2_last.slice(0, -2) + "\n";
         }
 
-        params = "new CanvasMasao.Game({ \n" + map0_.join('') + map1_.join('') + map2_.join('') + lay0_.join('') + lay1_.join('') + lay2_last + prmData + "})\; \n ";
+        map_ret = map0_.join('') + map1_.join('') + map2_.join('');
+        lay_ret = lay0_.join('') + lay1_.join('') + lay2_last.slice(0, -2) + "\n";
+
+        _params = map0_.join('') + map1_.join('') + map2_.join('') + lay0_.join('') + lay1_.join('') + lay2_last + prmData;
 
         break;
     }
-    return params;
+
+    var params = Object.assign(paramdata1, paramdata2);
+    return [_params, params, paramdata1, paramdata2];
 
   };
+
   //  設定用Paramを書き出す
   var getConfig = function(flag) {
     flag = flag * 1;
@@ -762,6 +812,142 @@ var mal = (function() {
         break;
     }
     return res;
+  };
+
+  //  Paramを書き換える
+  var setParam = function(prm, value) {
+    con_params[prm] = value;
+    con_params2[prm] = value;
+    return;
+  };
+
+  //  Paramを書き換える
+  var newProject = function(version) {
+    var cvs_c1 = document.getElementById("c1");
+    var ctx_c1 = cvs_c1.getContext("2d");
+    var cvs_p1 = document.getElementById("plt1");
+    var ctx_p1 = cvs_p1.getContext("2d");
+    createMapdata(game_width, game_height, mapmode);
+    con_params = createParams();
+    con_params2 = createParams();
+    ctx_c1.clearRect(0, 0, game_width*32, game_height*32);
+    ctx_p1.clearRect(0, 0, plt_width*32, plt_height*32);
+    ctx_p1.drawImage(img_plt1, 0, 0);
+    ctx_p1.fillStyle = "rgba(" + [255, 0, 0, 0.5] + ")";
+    ctx_p1.fillRect(0, 0, 32, 32);
+    chip1 = parts_obj[0].charAt(0);
+    chip1_x = 0;
+    chip1_y = 0;
+    var edt = document.getElementById("mal_editor");
+    edt.scrollTo(0,edt.scrollHeight);
+    return;
+  };
+
+  //  エディタに描く
+  var drawEditor = function(x, y, w, h, layer, chip) {
+    var cvs_c1 = document.getElementById("c1");
+    var ctx_c1 = cvs_c1.getContext("2d");
+    var cvs_c2 = document.getElementById("c2");
+    var ctx_c2 = cvs_c2.getContext("2d");
+    switch(layer){
+      case 1:
+        ctx_c1.clearRect(x*32, y*32, w*32, h*32);
+        var chipX = 0;
+        var chipY = 0;
+        for (var c = 0; c < Object.keys(parts_obj).length; c++) {
+          var prts_count = parts_obj[c].search(chip);
+          if (prts_count == -1) {
+            continue;
+          }
+
+          chipX = prts_count;
+          chipY = c;
+        }
+        for (var i = 0; i < w; i++) {
+          for (var i2 = 0; i2 < h; i2++) {
+            ctx_c1.drawImage(img_plt1, chipX * 32, chipY * 32, 32, 32, (x + i) * 32, (y + i2) * 32, 32, 32);
+            if (x + i < 60) {
+              map0[y + i2][x + i] = chip;
+            } else if (x + i > 59 && x + i < 120) {
+              map1[y + i2][x + i - 60] = chip;
+            } else if (x + i > 119 && x + i < 180) {
+              map2[y + i2][x + i - 120] = chip;
+            }
+          }
+
+        }
+
+      break;
+
+    }
+    return;
+  };
+
+
+  //  JSONを読み込む
+  var mc_load = function(data){
+    var metadata = {};
+    if (data["masao-json-format-version"] == null) {
+      return null;
+    }
+
+    var version = data.version;
+    newProject(version);
+
+    var ref_meta = data.metadata;
+    if(ref_meta != null){
+      metadata.title = ref_meta.title;
+      metadata.auther = ref_meta.auther;
+      metadata.editor = ref_meta.editor;
+      metadata.url = ref_meta.url;
+    }
+
+    var ref_prm = data.params;
+
+    var r = new RegExp(".{1,2}","g");
+    for (var i = 0; i <= 29; i++) {
+      var m = "............................................................".split('');
+      var l = "........................................................................................................................".match(r);
+      var m0 = ref_prm['map0-' + i];
+      var m1 = ref_prm['map1-' + i];
+      var m2 = ref_prm['map2-' + i];
+      var l0 = ref_prm['layer0-' + i];
+      var l1 = ref_prm['layer1-' + i];
+      var l2 = ref_prm['layer2-' + i];
+      (m0 != null)?map0[i]=m0.split(''):map0[i]=m;
+      (m1 != null)?map1[i]=m1.split(''):map1[i]=m;
+      (m2 != null)?map2[i]=m2.split(''):map2[i]=m;
+
+      (l0 != null)?lay0[i]=l0.match(r):lay0[i]=l;
+      (l1 != null)?lay1[i]=l1.match(r):lay1[i]=l;
+      (l2 != null)?lay2[i]=l2.match(r):lay2[i]=l;
+    }
+    for (var i = 0; i <= 29; i++) {
+      for (var i2 = 0; i2 <= 59; i2++) {
+        if(map0[i][i2]!=".") drawEditor(i2,i,1,1,1,map0[i][i2]);
+        if(map1[i][i2]!=".") drawEditor(i2 + 60,i,1,1,1,map1[i][i2]);
+        if(map2[i][i2]!=".") drawEditor(i2 + 120,i,1,1,1,map2[i][i2]);
+      }
+    }
+    var con = Object.keys(ref_prm);
+    for(let i in con) {
+      if ( ~con[i].indexOf('map0-')) continue;
+      else if ( ~con[i].indexOf('map1-')) continue;
+      else if ( ~con[i].indexOf('map2-')) continue;
+      else if ( ~con[i].indexOf('layer0-')) continue;
+      else if ( ~con[i].indexOf('layer1-')) continue;
+      else if ( ~con[i].indexOf('layer2-')) continue;
+
+      if (ref_prm[con[i]] != def_params[con[i]]) {
+      console.log(con[i],ref_prm[con[i]],def_params[con[i]]);
+      setParam(con[i], ref_prm[con[i]]);
+
+      }
+
+
+    }
+
+
   };
 
 
@@ -859,6 +1045,9 @@ var mal = (function() {
     Editor: Editor,
     Palette: Palette,
     SecPalette: SecPalette,
+    drawEditor: drawEditor,
+    newProject: newProject,
+    setParam: setParam,
     //  イベント登録
     add: function(type, func) {
       switch (type) {
@@ -916,10 +1105,15 @@ var mal = (function() {
       }
       return;
     },
+
     getParamsData: function() {
       var data = getParams();
-      return data;
+      var params = "";
+      params = "new CanvasMasao.Game({\n" + data[0] + "});\n";
+      console.log(params);
+      return params;
     },
+
     scrollEditor: function(direction, block) {
       var edt = document.getElementById("mal_editor");
       block = block * 32;
@@ -966,52 +1160,6 @@ var mal = (function() {
       }
       return;
     },
-
-    drawEditor: function(x, y, w, h, layer, chip) {
-      var cvs_c1 = document.getElementById("c1");
-      var ctx_c1 = cvs_c1.getContext("2d");
-      var cvs_c2 = document.getElementById("c2");
-      var ctx_c2 = cvs_c2.getContext("2d");
-      switch(layer){
-        case 1:
-          ctx_c1.clearRect(x*32, y*32, w*32, h*32);
-          var chipX = 0;
-          var chipY = 0;
-          for (var c = 0; c < Object.keys(parts_obj).length; c++) {
-            var prts_count = parts_obj[c].search(chip);
-            if (prts_count == -1) {
-              continue;
-            }
-
-            chipX = prts_count;
-            chipY = c;
-          }
-          for (var i = 0; i < w; i++) {
-            for (var i2 = 0; i2 < h; i2++) {
-              ctx_c1.drawImage(img_plt1, chipX * 32, chipY * 32, 32, 32, (x + i) * 32, (y + i2) * 32, 32, 32);
-              if (x + i < 60) {
-                map0[y + i2][x + i] = chip;
-              } else if (x + i > 59 && x + i < 120) {
-                map1[y + i2][x + i - 60] = chip;
-              } else if (x + i > 119 && x + i < 180) {
-                map2[y + i2][x + i - 120] = chip;
-              }
-            }
-
-          }
-
-        break;
-
-      }
-      return;
-    },
-
-    //  Paramを書き換える
-    setParam: function(prm, value) {
-      con_params[prm] = value;
-      con_params2[prm] = value;
-      return;
-    },
     //  デフォルトのParamを取得
     getDefaultParams: function() {
       return def_params;
@@ -1034,35 +1182,53 @@ var mal = (function() {
 
       return;
     },
-    //  Paramを書き換える
-    newProject: function(version) {
-      var cvs_c1 = document.getElementById("c1");
-      var ctx_c1 = cvs_c1.getContext("2d");
-      var cvs_p1 = document.getElementById("plt1");
-      var ctx_p1 = cvs_p1.getContext("2d");
-      createMapdata(game_width, game_height, mapmode);
-      con_params = createParams();
-      con_params2 = createParams();
-      ctx_c1.clearRect(0, 0, game_width*32, game_height*32);
-      ctx_p1.clearRect(0, 0, plt_width*32, plt_height*32);
-      ctx_p1.drawImage(img_plt1, 0, 0);
-      ctx_p1.fillStyle = "rgba(" + [255, 0, 0, 0.5] + ")";
-      ctx_p1.fillRect(0, 0, 32, 32);
-      chip1 = parts_obj[0].charAt(0);
-      chip1_x = 0;
-      chip1_y = 0;
-      var edt = document.getElementById("mal_editor");
-      edt.scrollTo(0,edt.scrollHeight);
-      return;
-    },
-    setEditMode: function(mode){
 
+    setEditMode: function(mode){
+      pen = mode;
     },
     getNowChip: function(){
       return chip1;
     },
     getNowChip2: function(){
       return chip2;
+    },
+
+    getParamsAll: function(){
+      return getConfig(prm_con);
+    },
+
+    getParam: function(key){
+      return getConfig(1)[key];
+    },
+
+    getJSON: function(title,auther,editor,url){
+      var meta = {};
+      if (title != 0 && title != null) {
+        meta.title = title;
+      }
+      if (auther != 0 && auther != null) {
+        meta.auther = auther;
+      }
+      if (editor != 0 && editor != null) {
+        meta.editor = editor;
+      }else {
+        meta.editor = "MasaoApp Library: " + msapp_v;
+      }
+      if (url != 0 && url != null) {
+        meta.url = url;
+      }
+
+
+      var params = getParams();
+      var obj = JSON.stringify(params[0]);
+      var version = ms_version;
+      var jsondata = {"masao-json-format-version": "draft-4", "version":version, "metadata":meta, "params":params[1]};
+      console.log(jsondata);
+      return JSON.stringify(jsondata);
+    },
+
+    loadJSON: function(jsondata){
+      mc_load(jsondata);
     }
 
   };
