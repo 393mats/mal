@@ -3,7 +3,7 @@ MasaoAppを元に制作した「スーパー正男」の制作用エディタを
 
 CSS、Javascriptを用いて好みにエディタを作ることができます。
 
-現在の最新バージョン：0.52 β
+現在の最新バージョン：0.6 β
 
 ## 設置方法
 
@@ -30,7 +30,7 @@ CSS、Javascriptを用いて好みにエディタを作ることができます�
         "height": "29",  //マップの高さ（ブロック単位）
         "mapmode": "0",  //マップモード。１で第３版マップデータを使用(未実装)
         "scroll": "1"    //スクロールモード。1で自由、それ以外はスクロールメソッド使用
-        "prm-con": "0"   //出力モード。0でデフォルト値を出力しない
+        "prm-con": "0"   //出力モード。0でデフォルト値を出力しない。１で出力
       });
     </script>
 ``` 
@@ -55,7 +55,7 @@ CSS、Javascriptを用いて好みにエディタを作ることができます�
     </script>
 ``` 
 
-パレット（背景レイヤー）
+パレット（背景レイヤー）　※未実装
 
 ``` 
 <!-- MAL SecondPalette -->
@@ -68,7 +68,7 @@ CSS、Javascriptを用いて好みにエディタを作ることができます�
     </script>
 ``` 
 
-## 拡張メソッド
+## メソッド
 エディタのカスタマイズ用に各メソッドを用意しています。
 
 ### mal.add(登録先, 関数名)
@@ -104,7 +104,13 @@ CSS、Javascriptを用いて好みにエディタを作ることができます�
 |down|下へxブロック移動|
 
 ### mal.setParam(param名,　値)
-map,layer以外の指定したParamデータを書き換えます。
+map,layer以外の指定したParamデータの値を書き換えます。
+
+### mal.getParam(param名)
+map,layer以外の指定したParamデータの値を取得します。
+
+### mal.getParamsAll()
+map,layer以外のParamデータを全て取得します。
 
 ### mal.getDefaultParams()
 デフォルトのParam値を取得します。
@@ -143,6 +149,12 @@ Param、エディタをリセットします。
 
 ### mal.getNowChip2()
 選択中の背景パーツを取得します。
+
+### mal.getJSON(title, auther, editor, url)
+編集中の正男をmasao-json-formatで書き出します。引数はmetadataで、0で空。
+
+### mal.loadJSON(データ)
+masao-json-format形式のJSONデータを読み込み、反映します。
 
 ---
 ## オプションのメソッド
