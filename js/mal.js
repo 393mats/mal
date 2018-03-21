@@ -808,7 +808,7 @@ var mal = (function() {
         prmStr = prmStr.slice(2);
         prmStr = prmStr.slice(0, -1);
         res = prmStr;
-        console.log("Param:", res);
+        //console.log("Param:", res);
         break;
     }
     return res;
@@ -939,7 +939,7 @@ var mal = (function() {
       else if ( ~con[i].indexOf('layer2-')) continue;
 
       if (ref_prm[con[i]] != def_params[con[i]]) {
-      console.log(con[i],ref_prm[con[i]],def_params[con[i]]);
+      //console.log(con[i],ref_prm[con[i]],def_params[con[i]]);
       setParam(con[i], ref_prm[con[i]]);
 
       }
@@ -1194,11 +1194,14 @@ var mal = (function() {
     },
 
     getParamsAll: function(){
-      return getConfig(prm_con);
+      var data = "{" + getConfig(0) + "}";
+      return JSON.parse(data);
     },
 
     getParam: function(key){
-      return getConfig(1)[key];
+      var data = "{" + getConfig(0) + "}";
+      var data2 = JSON.parse(data);
+      return data2[key];
     },
 
     getJSON: function(title,auther,editor,url){
