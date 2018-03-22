@@ -3,7 +3,7 @@
 var mal = (function() {
   "use strict";
 
-  var msapp_v = "0.7";
+  var msapp_v = "0.71";
 
   var img_plt1 = new Image();
   var img_plt2 = new Image();
@@ -736,31 +736,31 @@ var mal = (function() {
         var lay1_ = [];
         var lay2_ = [];
         for (var i = 0; i <= 29; i++) {
-          paramdata1["map0_" + i] = map0[i].join('');
+          paramdata1["map0-" + i] = map0[i].join('');
           map0_[i] = "\"map0-" + i + "\" : \"" + map0[i].join('') + "\",\n";
           //map0_2[i] = map0[i].join('');
         }
         for (var i = 0; i <= 29; i++) {
-          paramdata1["map1_" + i] = map1[i].join('');
+          paramdata1["map1-" + i] = map1[i].join('');
           map1_[i] = "\"map1-" + i + "\" : \"" + map1[i].join('') + "\",\n";
           //map1_2[i] = map1[i].join('');
         }
         for (var i = 0; i <= 29; i++) {
-          paramdata1["map2_" + i] = map2[i].join('');
+          paramdata1["map2-" + i] = map2[i].join('');
           map2_[i] = "\"map2-" + i + "\" : \"" + map2[i].join('') + "\",\n";
           //map1_2[i] = map1[i].join('');
         }
 
         for (var i = 0; i <= 29; i++) {
-          paramdata2["layer0_" + i] = lay0[i].join('');
+          paramdata2["layer0-" + i] = lay0[i].join('');
           lay0_[i] = "\"layer0-" + i + "\" : \"" + lay0[i].join('') + "\",\n";
         }
         for (var i = 0; i <= 29; i++) {
-          paramdata2["layer1_" + i] = lay1[i].join('');
+          paramdata2["layer1-" + i] = lay1[i].join('');
           lay1_[i] = "\"layer1-" + i + "\" : \"" + lay1[i].join('') + "\",\n";
         }
         for (var i = 0; i <= 29; i++) {
-          paramdata2["layer2_" + i] = lay2[i].join('');
+          paramdata2["layer2-" + i] = lay2[i].join('');
           lay2_[i] = "\"layer2-" + i + "\" : \"" + lay2[i].join('') + "\",\n";
         }
 
