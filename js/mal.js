@@ -1,9 +1,9 @@
-//MasaoApp Library (MAL) β0.6
+//MasaoApp Library (MAL)
 //Developed by Tex
 var mal = (function() {
   "use strict";
 
-  var msapp_v = "0.6";
+  var msapp_v = "0.7";
 
   var img_plt1 = new Image();
   var img_plt2 = new Image();
@@ -52,6 +52,9 @@ var mal = (function() {
 
   var cb_editorMoved_c = 0;
   var cb_editorMoved = [];
+
+  var cb_afterLoad_c = 0;
+  var cb_afterLoad = [];
 
   var def_params = {
     "mes1_name": "ダケシ",
@@ -887,6 +890,9 @@ var mal = (function() {
   //  JSONを読み込む
   var mc_load = function(data){
     var metadata = {};
+    if (typeof data != "object") {
+      return null;
+    }
     if (data["masao-json-format-version"] == null) {
       return null;
     }
@@ -946,7 +952,7 @@ var mal = (function() {
 
 
     }
-
+    callBack_aftLoaded();
 
   };
 
@@ -979,6 +985,12 @@ var mal = (function() {
     }
   };
 
+  //  コールバック：JSONの読み込みが完了した時
+  var callBack_aftLoaded = function() {
+    for (var i = 0; i < cb_afterload_c; i++) {
+      cb_afterload[i]();
+    }
+  };
 
   var Editor = function(mal_prms) {
     if (mal_prms.width != null) {
@@ -1073,6 +1085,11 @@ var mal = (function() {
         case "editor_moved":
           cb_editorMoved[cb_editorMoved_c] = func;
           cb_editorMoved_c++;
+
+          break;
+        case "after_loaded":
+          cb_afterLoad[cb_afterLoad_c] = func;
+          cb_afterLoad_c++;
 
           break;
 
@@ -1232,6 +1249,12 @@ var mal = (function() {
 
     loadJSON: function(jsondata){
       mc_load(jsondata);
+    },
+    getMasaoVersion: function(){
+      return ms_version;
+    },
+    version: function(){
+      return msapp_v;
     }
 
   };
