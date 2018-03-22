@@ -3,7 +3,7 @@ MasaoAppを元に制作した「スーパー正男」の制作用エディタを
 
 CSS、Javascriptを用いて好みにエディタを作ることができます。
 
-現在の最新バージョン：0.6 β
+現在の最新バージョン：0.7 β
 
 ## 設置方法
 
@@ -81,6 +81,7 @@ CSS、Javascriptを用いて好みにエディタを作ることができます�
 |editor_moved|x, y, chip|マウスがエディタ上を動いた時|
 |palette_clicked|x, y, chip|パレットをクリックした時|
 |palette_moved|x, y, chip|マウスがパレット上を動いた時|
+|after_loaded|なし|JSONファイルを読み込み終えた時|
 
 ### mal.showGrid(モード)
 エディタ上のグリッドを表示・非表示します。
@@ -155,6 +156,12 @@ Param、エディタをリセットします。
 
 ### mal.loadJSON(データ)
 masao-json-format形式のJSONデータを読み込み、反映します。
+
+### mal.getMasaoVersion()
+現在の正男のバージョンを取得します。
+
+### mal.version()
+MALのバージョンを取得します。
 
 ---
 ## オプションのメソッド
