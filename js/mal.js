@@ -987,8 +987,8 @@ var mal = (function() {
 
   //  コールバック：JSONの読み込みが完了した時
   var callBack_aftLoaded = function() {
-    for (var i = 0; i < cb_afterload_c; i++) {
-      cb_afterload[i]();
+    for (var i = 0; i < cb_afterLoad_c; i++) {
+      cb_afterLoad[i]();
     }
   };
 
